@@ -1,71 +1,64 @@
-const productos = {
-    Herbicida: 10,
-    Fungicida: 20,
-    Insecticida: 30,
+
+
+function mostrarMensajeOk() {
+    console.log("Se hizo click en ok")
 }
 
-function buscarProducto(nombre) {
-    const productoBuscado = nombre.toLowerCase();
-    for (let producto in productos) {
-        if (producto.toLowerCase() === productoBuscado) {
-            return `Producto encontrado: ${producto} - Precio: $${productos[producto]}`;
-        }
-    }
-    return "Producto no encontrado";
-}
+function renderizarProductos(productos) {
 
-function calcularTotal() {
-    let total = 0;
-    let continuar = true;
+    const contenedor = document.getElementById("contenedor");
 
-    while (continuar) {
-        let mensajeProductos = "Productos disponibles:\n";
-        for (let producto in productos) {
-            mensajeProductos += `${producto}: $${productos[producto]}\n`;
-        }
-        alert(mensajeProductos);
+    for (const producto of productos) {
 
-        const productoSeleccionado = prompt("Ingrese el nombre del producto seleccionado: ");
+        const divPadre = document.createElement("div");
+        divPadre.className = "card";
 
-        if (productoSeleccionado in productos) {
-            const cantidad = parseInt(prompt("Ingrese la cantidad de unidades: "));
-            const subtotal = productos[productoSeleccionado] * cantidad;
-            total += subtotal;
-            alert(`Subtotal de ${productoSeleccionado}: $${subtotal}`);
-        } else {
-            alert("Producto no válido. Por favor, seleccione un producto válido.");
-        }
+        const divCard = document.createElement("div");
+        divCard.className = "card";
 
-        const respuesta = prompt("¿Desea agregar otro producto? (Sí/No): ").toLowerCase();
-        continuar = respuesta === "sí" || respuesta === "si";
-    }
+        const divCardBody = document.createElement("div");
+        divCardBody.className = "card-body";
 
-    alert(`El total de su compra es: $${total}`);
-}
+        const h5 = document.createElement("h5");
+        h5.className = "card-title";
+        h5.innerText = producto.nombre;
 
-let opcion;
-while (opcion !== "3") {
-    opcion = prompt("Seleccione una opción:\n1. Filtrar un producto\n2. Comprar\n3. Salir");
+        const p = document.createElement("p");
+        p.className = "card-text";
+        p.innerHTML = `<strong>Precio:</strong> ${producto.precio} - <strong>Stock:</strong> ${producto.stock}`;
 
-    switch (opcion) {
-        case "1":
-            const nombreProductoABuscar = prompt("Ingrese el nombre del producto a filtrar: ");
-            alert(buscarProducto(nombreProductoABuscar));
-            break;
-        case "2":
-            calcularTotal();
-            break;
-        case "3":
-            alert("Saliendo del programa. ¡Hasta luego!");
-            break;
-        default:
-            alert("Opción no válida. Por favor, seleccione una opción válida.");
-            break;
+        const button = document.createElement("button");
+        button.className = "btn btn-primary";
+        button.innerText = "Comprar";
+
+        divCardBody.append(h5, p, button);
+        divCard.append(divCardBody);
+        divPadre.append(divCard);
+        contenedor.append(divPadre);
+
     }
 }
 
 
-calcularTotal();
+class producto {
+
+    constructor(nombre, precio, stock) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+
+    }
+}
+
+const ListadoDeProductos = [
+    new producto("Herbicida", 100, 10),
+    new producto("Fungicida", 200, 10),
+    new producto("Insecticida", 300, 10),
+    new producto("Pesticida", 500, 10),
+];
+
+renderizarProductos(ListadoDeProductos);
+
 
 
 
