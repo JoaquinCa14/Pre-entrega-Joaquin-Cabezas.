@@ -1,4 +1,11 @@
+function inicializarInput() {
 
+    const input = document.getElementById("filtrarProducto");
+
+    input.addEventListener("keydown", () => {
+        console.log("keydown");
+    });
+}
 
 function mostrarMensajeOk() {
     console.log("Se hizo click en ok")
@@ -58,7 +65,7 @@ const ListadoDeProductos = [
 ];
 
 renderizarProductos(ListadoDeProductos);
-
+inicializarInput();
 
 
 
