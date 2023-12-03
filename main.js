@@ -8,7 +8,7 @@ function inicializarInput() {
 }
 
 function mostrarMensajeOk() {
-    console.log("Se hizo click en ok")
+    Swal.fire("Su compra ha sido procesada y realizada con exito!");
 }
 
 function renderizarProductos(productos) {
@@ -37,12 +37,46 @@ function renderizarProductos(productos) {
         const button = document.createElement("button");
         button.className = "btn btn-primary";
         button.innerText = "Comprar";
+        button.addEventListener("click", async () => {  
+            const { value: cantidad } = await 
+            Swal.fire({
+                title: 'Ingrese la cantidad:',
+                input: 'number',
+                inputLabel: 'Cantidad',
+                inputPlaceholder: 'Ingrese la cantidad...',
+                showCancelButton: true,
+                inputValidator: (value) => {
+                    if (!value || value <= 0) {
+                        return 'Por favor, ingrese una cantidad válida.';
+                    }
+                }
+            });
+
+            if (cantidad) {
+                const subtotal = producto.precio * cantidad;
+
+                Swal.fire({
+                    title: 'Resumen de compra',
+                    html: `<p><strong>Producto:</strong> ${producto.nombre}</p>
+                           <p><strong>Cantidad:</strong> ${cantidad}</p>
+                           <p><strong>Subtotal:</strong> $${subtotal.toFixed(2)}</p>`,
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Confirmar compra',
+                    cancelButtonText: 'Cancelar',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        console.log("Compra confirmada");
+                        mostrarMensajeOk();
+                    }
+                });
+            }
+        });
 
         divCardBody.append(h5, p, button);
         divCard.append(divCardBody);
         divPadre.append(divCard);
         contenedor.append(divPadre);
-
     }
 }
 
@@ -63,6 +97,14 @@ const ListadoDeProductos = [
     new producto("Insecticida", 300, 10),
     new producto("Pesticida", 500, 10),
 ];
+
+fetch('data.json')
+    .then ( (response) => {
+        return response.json();
+    })
+    .then((responsejson) => {
+        console.log(responsejson);
+    });
 
 renderizarProductos(ListadoDeProductos);
 inicializarInput();

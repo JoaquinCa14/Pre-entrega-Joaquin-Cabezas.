@@ -1,0 +1,26 @@
+[
+    {
+        "Nombre": "Herbicida",
+        "Precio": 100,
+        "Stock": 10
+    },
+
+
+    {
+        "Nombre": "Fungicida",
+        "Precio": 200,
+        "Stock": 10
+    },
+
+    {
+        "Nombre": "Insecticida",
+        "Precio": 300,
+        "Stock": 10
+    },
+
+    {
+        "Nombre": "Pesticida",
+        "Precio": 500,
+        "Stock": 10
+    }
+]

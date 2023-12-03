@@ -1,0 +1,24 @@
+body{
+    background-image: url(https://e1.pxfuel.com/desktop-wallpaper/585/996/desktop-wallpaper-beautiful-green-grass-field-%E2%9D%A4-for-ultra-field.jpg);
+    color: #FFFFFF
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#contenedor{
+    width: 30%;
+    margin: 10px auto;
+}
+
+header{
+    width: 25%;
+    margin: 0px auto;
+    color:#FFFFFF
+}
+
+#filtrarProducto{
+    width: 20%;
+    margin: 0px auto;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
